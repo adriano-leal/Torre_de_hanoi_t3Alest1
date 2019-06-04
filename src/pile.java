@@ -1,4 +1,3 @@
-package br.pucrs.adt;
 import java.io.Serializable;
 
 public class PilhaEnc<T extends Comparable<T>> implements StackTAD<T>, Serializable {
