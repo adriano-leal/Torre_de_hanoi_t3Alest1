@@ -7,13 +7,13 @@ public class Pile<T extends Comparable<T>> implements PileTAD<T>, Serializable {
 	
 	public void push(T dado)
 	{
-		System.out.println("pushed");
 		lst.add(0, dado);
 	}
 	
 	public T pop()
 	{
-		return lst.remove(0);
+		if (!this.isEmpty()) return lst.remove(0);
+		else return null;
 	}
 	
 	public T top()

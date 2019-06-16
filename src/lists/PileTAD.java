@@ -1,7 +1,7 @@
 package lists;
 import java.util.EmptyStackException;
 
-public interface PileTAD<E> {
+public interface PileTAD<E extends Comparable<E>> {
   public int size();
 
   public boolean isEmpty();
