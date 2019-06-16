@@ -1,9 +1,8 @@
+package lists;
+import lists.*;
 import java.io.Serializable;
 import java.util.Iterator;
 
-//
-// Falta implementar um atributo refTail
-//
 public class ListDoubleLinked <D extends Comparable<D>> implements ListTAD<D>, Serializable, Iterable<D> {
 
 	private class Node  implements Serializable {
@@ -396,15 +395,17 @@ public class ListDoubleLinked <D extends Comparable<D>> implements ListTAD<D>, S
 	}
 	
 	public String toString() {
+		StringBuilder strBuilder = new StringBuilder();
 		Node aux = refHead;
-		String res = "";
-		int tot = size();
+		int length = size();
 		
-		for (int i = 0; i < tot; i++) {
-			res = res + aux.getItem().toString();
+		strBuilder.append('[');
+		for (int i = 0; i < length; i++) {
+			strBuilder.append(aux.getItem().toString());
+			if (i != length-1) strBuilder.append(", ");
 			aux = aux.getNext();
 		}
-		
-		return res;
+		strBuilder.append(']');
+		return strBuilder.toString();
 	}
 }
