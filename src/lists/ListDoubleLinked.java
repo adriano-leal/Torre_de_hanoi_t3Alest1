@@ -125,7 +125,6 @@ public class ListDoubleLinked <D extends Comparable<D>> implements ListTAD<D>, S
     	D res = null;
     	Node aux;
     	int i;
-    	
         if ((pos >= 0) && (pos < qtdElem))
     	   if(refHead != null) 
     	      {
