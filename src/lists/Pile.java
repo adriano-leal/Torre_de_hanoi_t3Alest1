@@ -3,6 +3,7 @@ import java.io.Serializable;
 import lists.*;
 
 public class Pile<T extends Comparable<T>> implements PileTAD<T>, Serializable {
+	private static final long serialVersionUID = 1L;
 	private ListTAD<T> lst = new ListDoubleLinked<T>();
 	
 	public void push(T dado)
@@ -13,12 +14,13 @@ public class Pile<T extends Comparable<T>> implements PileTAD<T>, Serializable {
 	public T pop()
 	{
 		if (!this.isEmpty()) return lst.remove(0);
-		else return null;
+		return null;
 	}
 	
 	public T top()
 	{
-		return lst.get(0);
+		if (!this.isEmpty()) return lst.get(0);
+		return null;
 	}
 	
 	public boolean isEmpty()
@@ -29,6 +31,15 @@ public class Pile<T extends Comparable<T>> implements PileTAD<T>, Serializable {
 	public int size()
 	{
 		return lst.size();
+	}
+
+	public Pile<T> copy() {
+		Pile<T> auxPile = new Pile<T>();
+		if (size() == 0) return auxPile;
+		for (int i=lst.size()-1; i >= 0; i--) {
+			auxPile.push(lst.get(i));
+		}
+		return auxPile;
 	}
 
 	public String toString() {
