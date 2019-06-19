@@ -8,6 +8,7 @@ public class HanoiTower extends Game {
   private final static int MAX_DISKS = 7;
   private final static int MIN_DISKS = 3;
   private int totalDisks;
+  private int totalMoves = 0;
   private Pile<Disk>[] sticks;
 
   private class Disk implements Comparable<Disk> {
@@ -60,6 +61,7 @@ public class HanoiTower extends Game {
           layout.append("|");
         }
       }
+      if (i == 1) layout.append("      Total Moves: "+this.totalMoves);
       layout.append("\n");
     }
     for (int i= TOTAL_STICKS; i > 0; i--) {layout.append(splitter);}
@@ -74,6 +76,7 @@ public class HanoiTower extends Game {
   }
 
   public void moveDisk(int fromStick, int toStick) {
+    this.totalMoves++;
     Disk diskToMove = (Disk) this.sticks[fromStick].top();
     Disk topDisk = (Disk) this.sticks[toStick].top();
 
@@ -90,7 +93,11 @@ public class HanoiTower extends Game {
   public void next() {
     int fromStick = (int) super.ask("Move stick from (A, B, C, ...): ").toUpperCase().charAt(0);
     int toStick = (int) super.ask("To stick (A, B, C, ...): ").toUpperCase().charAt(0);
-    this.moveDisk(fromStick - 65, toStick - 65);
+    boolean validFromStick = fromStick-65 >= 0 && fromStick - 65 < TOTAL_STICKS;
+    boolean validToStick = toStick-65 >= 0 && toStick - 65 < TOTAL_STICKS;
+
+    if (!validFromStick || !validToStick) this.handleWrongMove();
+    else this.moveDisk(fromStick - 65, toStick - 65);
   }
 
   private boolean isValidMove(Disk diskToMove, Disk topDisk) {
